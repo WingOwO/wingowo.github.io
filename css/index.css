@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+body
+{
+	background-color: #79CEF1;
+
+}
+
+#title
+{
+	background: url("../img/bg.jpg");
+	background-size: 100% 100%;
+}
