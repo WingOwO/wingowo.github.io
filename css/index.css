@@ -1,13 +1,36 @@
-@charset "UTF-8";
-
-body
-{
-	background-color: #79CEF1;
-
+body {
+    margin: 0;
+    /*overflow: hidden;*/
 }
 
-#title
+#bg_Canvas {
+    overflow: hidden;
+    z-index: -1;
+    /*position: absolute;*/
+    height: 100%;
+    width: 100%;
+}
+
+#start
 {
-	background: url("../img/bg.jpg");
-	background-size: 100% 100%;
+	text-align: center;
+	font-family: Cursive;
+	margin: 0;
+    overflow: hidden;
+}
+
+#ending
+{
+	text-align: center;
+	margin: 0;
+    overflow: hidden;
+    color:#F00;
+}
+
+#bg_Frame
+{
+    background-color: rgba(255,218,185,0.3);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 16px
 }
