@@ -8,7 +8,7 @@
 
     <script src="lib/three.js"></script>
 
-    
+    <script src="lib/av-min.js"></script>
    
     <script src="js/wing_tpanorama.js"></script>
 
@@ -19,12 +19,26 @@
     <title>WingOwO</title>
 
 
-    <script>
 
-
-    </script>
 </head>
 <body>
+
+	<script type="text/javascript">
+		console.log('Start')
+		var { Query, User } = AV;
+		AV.init({
+		  appId: "{{AcGinDQ9PpVP9HmqB8Qdsn2r-MdYXbMMI}}",
+		  appKey: "{{FpVQ1UWRlWp2uBiNhssoXjcF}}",
+		  serverUrl: "https://wingowo.github.io"
+		});
+	 	
+	 	var TestObject = AV.Object.extend('TestObject');
+		var testObject = new TestObject();
+		testObject.set('words', 'Hello world!');
+		testObject.save().then(function (testObject) {
+		  console.log('Object saved.')
+		})
+	</script>
 
     <div id="bg_Canvas" class="fixed-top"></div>
 
