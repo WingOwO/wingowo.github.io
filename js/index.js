@@ -4,15 +4,13 @@ var tp;
 var navtop;
 var myNavbar;
 
-var t0 = "<h1>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a</h1>";
-var t1 = "<h1>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b<br>b</h1>";
+//console.log(window.location.pathname.substring(1));
+
+var showFrame;
+var frame;
 
 window.onload = function () {
-
-    myNavbar = $("#myNavbar");
-    
-    navtop = myNavbar.offset().top;
-
+//////////////////////////////////////////////////////////////////////////////////////
     opt = {
         container:'bg_Canvas',//容器ID
         url:'img/bg_360_0.jpg',
@@ -24,25 +22,55 @@ window.onload = function () {
     }
     tp = new tpanorama(opt);
     tp.init();
+//////////////////////////////////////////////////////////////////////////////////////
+    myNavbar = $("#myNavbar");
+    navtop = myNavbar.offset().top;
+//////////////////////////////////////////////////////////////////////////////////////
 
-    $("#change").html(t0);
+    showFrame = $("#showFrame");
+    frame = $.ajax({url:"html/blogTitleFrame.html",async:false}).responseText;
 
-    $("#main").click(function(){
-        removeActive();
-        $("#main").addClass("active");
-        $("#change").html(t0);
-    });
-
-    $("#index").click(function(){
-        removeActive();
-        $("#index").addClass("active");
-        $("#change").html(t1);
-    });
-
+    showIndex();
 
 }
 
 
+function showIndex()
+{
+    showFrame.html("");
+    var str = $.ajax({url:"blog/index.txt",async:false}).responseText;
+    var list = new Array();
+    list = str.split("\n");
+    for (i=0;i<list.length;i++)
+    {
+        if(list != "" || list != "\n")
+        {
+            showFrame.append("<br>");
+            showFrame.append(frame);
+            var title = list[i].split(".")[0];
+            showFrame.children("#frame").eq(i).append(title);
+            showFrame.append("<br>");
+        }
+    }
+    $(".blogTitle").click(function ()
+    {
+        showFrame.html("");
+        addBackButton();
+        var blog = "blog/" + $(this).html() + ".html";
+        var str = $.ajax({url:blog,async:false}).responseText;
+        showFrame.append(str);
+        addBackButton();
+    });
+}
+
+function addBackButton()
+{
+    showFrame.append("<br>");
+    showFrame.append("<button type=\"button\" class=\"btn btn-dark\" onclick=\"showIndex()\"><-Back</button>");
+    showFrame.append("<br>");
+}
+
+/*
 $(window).scroll(function () {
     var y = myNavbar.offset().top;
     var visibleTop = window.scrollY;
@@ -51,9 +79,7 @@ $(window).scroll(function () {
     } else if (visibleTop < navtop){
         myNavbar.removeClass("fixed-top bg-dark");
     }
-})
+});
 
-function removeActive() {
-    $("#main").removeClass("active");
-    $("#index").removeClass("active");
-}
+
+*/
